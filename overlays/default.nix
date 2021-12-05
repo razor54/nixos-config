@@ -12,6 +12,4 @@ final: prev: {
   # they switch.
   go = final.go_1_17;
 
-  # Fix 1password not working properly on Linux arm64.
-  _1password = final.callPackage ../pkgs/1password.nix {};
 }
