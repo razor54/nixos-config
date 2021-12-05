@@ -4,14 +4,14 @@
   # https://github.com/nix-community/home-manager/pull/2408
   environment.pathsToLink = [ "/share/fish" ];
 
-  users.users.mitchellh = {
+  users.users.andre = {
     isNormalUser = true;
-    home = "/home/mitchellh";
+    home = "/home/andre";
     extraGroups = [ "docker" "wheel" ];
     shell = pkgs.fish;
-    hashedPassword = "$6$p5nPhz3G6k$6yCK0m3Oglcj4ZkUXwbjrG403LBZkfNwlhgrQAqOospGJXJZ27dI84CbIYBNsTgsoH650C1EBsbCKesSVPSpB1";
+    hashedPassword = "$6$3yfIb8HfuVj1KOaT$0Pt71HYUtinfTzRXniNBCIMAF9tiKxBHPf/DFkSq4idyG7SIHHQOvymsRzG0Kna5LHQ/SM1GQ0sp01zWy2Tae/";
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGbTIKIPtrymhvtTvqbU07/e7gyFJqNS4S0xlfrZLOaY mitchellh"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIILBwvkB16dWegKd9W+iU7d9J/6wwkdp/IezS5yN9qJu andre@one.network"
     ];
   };
 
