@@ -10,7 +10,7 @@ font pango:Fira Code 10
 # Window visuals
 new_window pixel 2
 new_float pixel 2
-floating_minimum_size 400x300
+floating_minimum_size 1920x1080
 floating_maximum_size -1x-1
 focus_follows_mouse no
 
