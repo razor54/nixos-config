@@ -12,18 +12,22 @@ let sources = import ../../nix/sources.nix; in {
   # not a huge list.
   home.packages = [
     pkgs.bat
+    pkgs.fd
     pkgs.firefox
     pkgs.fzf
     pkgs.git-crypt
     pkgs.htop
     pkgs.jq
+    pkgs.ripgrep
     pkgs.rofi
-    pkgs.go
-    pkgs.gopls
     pkgs.tree
     pkgs.watch
     pkgs.zathura
     #pkgs._1password
+
+    pkgs.go
+    pkgs.gopls
+    pkgs.zig-master
 
     pkgs.tlaplusToolbox
     pkgs.tetex
@@ -39,7 +43,7 @@ let sources = import ../../nix/sources.nix; in {
     LC_ALL = "en_US.UTF-8";
     EDITOR = "nvim";
     PAGER = "less -FirSwX";
-    MANPAGER = "less -FirSwX";
+    MANPAGER = "sh -c 'col -bx | ${pkgs.bat}/bin/bat -l man -p'";
   };
 
   home.file.".inputrc".source = ./inputrc;
@@ -237,12 +241,14 @@ let sources = import ../../nix/sources.nix; in {
       customVim.AfterColors
 
       customVim.vim-nord
+      customVim.nvim-comment
       customVim.nvim-lspconfig
+      customVim.nvim-plenary # required for telescope
+      customVim.nvim-telescope
       customVim.nvim-treesitter
       customVim.nvim-treesitter-playground
       customVim.nvim-treesitter-textobjects
 
-      vimPlugins.ctrlp
       vimPlugins.vim-airline
       vimPlugins.vim-airline-themes
       vimPlugins.vim-eunuch

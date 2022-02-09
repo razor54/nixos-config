@@ -7,6 +7,9 @@
     # it'll impact your entire system.
     nixpkgs.url = "github:nixos/nixpkgs/release-21.11";
 
+    # We use the unstable nixpkgs repo for some packages.
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager/release-21.11";
 
@@ -14,19 +17,25 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # We have access to unstable nixpkgs if we want specific unstable packages.
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
     # Other packages
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    zig.url = "github:arqv/zig-overlay";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixpkgs-unstable, ... }@inputs: let
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: let
     mkVM = import ./lib/mkvm.nix;
 
     # Overlays is the list of overlays we want to apply from flake inputs.
     overlays = [
       inputs.neovim-nightly-overlay.overlay
+
+      (final: prev: {
+        # Zig doesn't export an overlay so we do it here
+        zig-master = inputs.zig.packages.${prev.system}.master.latest;
+
+        # To get Kitty 0.24.x. Delete this once it hits release.
+        kitty = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.kitty;
+      })
     ];
   in {
     nixosConfigurations.vm-aarch64 = mkVM "vm-aarch64" rec {
